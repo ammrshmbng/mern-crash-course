@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import { IoMoon } from "react-icons/io5";
 import { LuSun } from "react-icons/lu";
+import { useProductStore } from "../store/product";
 
 const Navbar = () => {
 	const { colorMode, toggleColorMode } = useColorMode();
+	const {products} =  useProductStore()
+	console.log(products);
 
 	return (
 		<Container maxW={"1140px"} px={4}>
