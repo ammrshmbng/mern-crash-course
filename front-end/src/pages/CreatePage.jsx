@@ -1,4 +1,4 @@
-import { Box, Button, Container, Heading, Input, useColorModeValue, VStack } from "@chakra-ui/react";
+import { Box, Button, Container, Heading, Input, useColorModeValue, useToast, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useProductStore } from "../store/product";
 
@@ -8,13 +8,27 @@ const CreatePage = () => {
 		price: "",
 		image: "",
 	});
+	const toast = useToast();
 
 	const { createProduct } = useProductStore();
 
 	const handleAddProduct = async () => {
 		const { success, message } = await createProduct(newProduct);
-    console.log("success", success);
-    console.log("message", message);
+		if (!success) {
+			toast({
+				title: "Error",
+				description: message,
+				status: "error",
+				isClosable: true,
+			});
+		} else {
+			toast({
+				title: "Success",
+				description: message,
+				status: "success",
+				isClosable: true,
+			});
+		}
 	};
 
 	return (
